@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Menu, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import "./Header.css";
+import "./style.css";
 
 function Header() {
   const logoUrl = process.env.PUBLIC_URL + "/logo.svg";
@@ -21,6 +21,9 @@ function Header() {
         </Menu.Item>
         <Menu.Item as={Link} to="/types">
           Types
+        </Menu.Item>
+        <Menu.Item as={Link} to="/pokemon">
+          Pokemon
         </Menu.Item>
       </Container>
     </Menu>

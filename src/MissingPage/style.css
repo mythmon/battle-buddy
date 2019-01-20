@@ -1,0 +1,5 @@
+.missing-page {
+  margin-top: 25vh;
+  transform: scale(1.5);
+  transform-origin: top;
+}

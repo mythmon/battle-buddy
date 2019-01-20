@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.css";
 import "./App.css";
 import TypesPage from "./TypesPage/index";
 import Header from "./components/Header";
+import MissingPage from "./MissingPage";
 
 export default class App extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class App extends Component {
               <Redirect to="/types" />
             </Route>
             <Route path="/types" component={TypesPage} />
+            <Route component={MissingPage} />
           </Switch>
         </>
       </BrowserRouter>
