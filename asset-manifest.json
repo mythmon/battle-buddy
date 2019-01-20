@@ -1,7 +1,7 @@
 {
   "main.css": "/battle-buddy/static/css/main.31eba54d.chunk.css",
-  "main.js": "/battle-buddy/static/js/main.be909bc5.chunk.js",
-  "main.js.map": "/battle-buddy/static/js/main.be909bc5.chunk.js.map",
+  "main.js": "/battle-buddy/static/js/main.70f7b174.chunk.js",
+  "main.js.map": "/battle-buddy/static/js/main.70f7b174.chunk.js.map",
   "static/css/1.3ac82323.chunk.css": "/battle-buddy/static/css/1.3ac82323.chunk.css",
   "static/js/1.cac3e885.chunk.js": "/battle-buddy/static/js/1.cac3e885.chunk.js",
   "static/js/1.cac3e885.chunk.js.map": "/battle-buddy/static/js/1.cac3e885.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/css/main.31eba54d.chunk.css.map": "/battle-buddy/static/css/main.31eba54d.chunk.css.map",
   "static/css/1.3ac82323.chunk.css.map": "/battle-buddy/static/css/1.3ac82323.chunk.css.map",
   "index.html": "/battle-buddy/index.html",
-  "precache-manifest.844448bb7c78ce73741a29d040f1e075.js": "/battle-buddy/precache-manifest.844448bb7c78ce73741a29d040f1e075.js",
+  "precache-manifest.48030ef5ef9d817f4a033bccf760e0e9.js": "/battle-buddy/precache-manifest.48030ef5ef9d817f4a033bccf760e0e9.js",
   "service-worker.js": "/battle-buddy/service-worker.js"
 }
