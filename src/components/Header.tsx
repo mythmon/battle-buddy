@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
+  const logoUrl = process.env.PUBLIC_URL + "/logo.svg";
   return (
     <Menu
       className="top-nav"
@@ -15,10 +16,10 @@ function Header() {
     >
       <Container>
         <Menu.Item as={Link} to="/">
-          <Image src="/logo.svg" spaced="right" className="logo" />
+          <Image src={logoUrl} spaced="right" className="logo" />
           Battle Buddy
         </Menu.Item>
-        <Menu.Item as={Link} to="/type">
+        <Menu.Item as={Link} to="/types">
           Types
         </Menu.Item>
       </Container>
