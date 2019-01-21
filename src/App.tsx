@@ -16,10 +16,10 @@ export default class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/">
-              <Redirect to="/types" />
+              <Redirect to="/pokemon" />
             </Route>
-            <Route path="/types" component={TypesPage} />
             <Route path="/pokemon" component={PokemonPage} />
+            <Route path="/types" component={TypesPage} />
             <Route component={MissingPage} />
           </Switch>
         </>

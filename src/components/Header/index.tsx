@@ -19,11 +19,11 @@ function Header() {
           <Image src={logoUrl} spaced="right" className="logo" />
           Battle Buddy
         </Menu.Item>
-        <Menu.Item as={Link} to="/types">
-          Types
-        </Menu.Item>
         <Menu.Item as={Link} to="/pokemon">
           Pokemon
+        </Menu.Item>
+        <Menu.Item as={Link} to="/types">
+          Types
         </Menu.Item>
       </Container>
     </Menu>
