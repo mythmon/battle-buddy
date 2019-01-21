@@ -1,18 +1,18 @@
 workflow "Test and deploy" {
   on = "push"
-  resolves = ["GitHub Action for npm-1"]
+  resolves = ["yarn deploy"]
 }
 
-action "GitHub Action for npm" {
+action "yarn test" {
   uses = "actions/npm@de7a3705a9510ee12702e124482fad6af249991b"
   args = "test"
   runs = "yarn"
 }
 
-action "GitHub Action for npm-1" {
+action "yarn deploy" {
   uses = "actions/npm@de7a3705a9510ee12702e124482fad6af249991b"
-  needs = ["GitHub Action for npm"]
   runs = "yarn"
   args = "deploy"
   secrets = ["GITHUB_TOKEN"]
+  needs = ["yarn test"]
 }
