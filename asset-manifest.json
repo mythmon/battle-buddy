@@ -1,16 +1,16 @@
 {
-  "main.css": "/battle-buddy/static/css/main.3569ae77.chunk.css",
-  "main.js": "/battle-buddy/static/js/main.632435ca.chunk.js",
-  "main.js.map": "/battle-buddy/static/js/main.632435ca.chunk.js.map",
+  "main.css": "/battle-buddy/static/css/main.63d54a2d.chunk.css",
+  "main.js": "/battle-buddy/static/js/main.2194c227.chunk.js",
+  "main.js.map": "/battle-buddy/static/js/main.2194c227.chunk.js.map",
   "static/css/1.0f6ed8ec.chunk.css": "/battle-buddy/static/css/1.0f6ed8ec.chunk.css",
   "static/js/1.4cc5142a.chunk.js": "/battle-buddy/static/js/1.4cc5142a.chunk.js",
   "static/js/1.4cc5142a.chunk.js.map": "/battle-buddy/static/js/1.4cc5142a.chunk.js.map",
   "runtime~main.js": "/battle-buddy/static/js/runtime~main.0e32d458.js",
   "runtime~main.js.map": "/battle-buddy/static/js/runtime~main.0e32d458.js.map",
   "static/media/semantic.css": "/battle-buddy/static/media/brand-icons.a1a749e8.svg",
-  "static/css/main.3569ae77.chunk.css.map": "/battle-buddy/static/css/main.3569ae77.chunk.css.map",
   "static/css/1.0f6ed8ec.chunk.css.map": "/battle-buddy/static/css/1.0f6ed8ec.chunk.css.map",
+  "static/css/main.63d54a2d.chunk.css.map": "/battle-buddy/static/css/main.63d54a2d.chunk.css.map",
   "index.html": "/battle-buddy/index.html",
-  "precache-manifest.061485417d8c7b045d0f4edd6292d3ff.js": "/battle-buddy/precache-manifest.061485417d8c7b045d0f4edd6292d3ff.js",
+  "precache-manifest.523859426f4a496e006442fdbe9fe4e9.js": "/battle-buddy/precache-manifest.523859426f4a496e006442fdbe9fe4e9.js",
   "service-worker.js": "/battle-buddy/service-worker.js"
 }

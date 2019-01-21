@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/battle-buddy/precache-manifest.061485417d8c7b045d0f4edd6292d3ff.js"
+  "/battle-buddy/precache-manifest.523859426f4a496e006442fdbe9fe4e9.js"
 );
 
 workbox.clientsClaim();
