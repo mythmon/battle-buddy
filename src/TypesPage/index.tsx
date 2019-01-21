@@ -59,11 +59,11 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
     }
 
     return (
-      <Container>
+      <Segment vertical>
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Header as="h2">Defender</Header>
+              <Header as="h2">Defender Info</Header>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -99,7 +99,7 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Container>
+      </Segment>
     );
   }
 }

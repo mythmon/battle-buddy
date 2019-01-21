@@ -5,8 +5,13 @@ import "semantic-ui-css/semantic.css";
 import "./App.css";
 import TypesPage from "./TypesPage/index";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import MissingPage from "./MissingPage";
 import PokemonPage from "./PokemonPage";
+import { HomePage } from "./HomePage";
+import { Container } from "semantic-ui-react";
+
+import "./style.css";
 
 export default class App extends Component {
   render() {
@@ -14,14 +19,15 @@ export default class App extends Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <>
           <Header />
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/pokemon" />
-            </Route>
-            <Route path="/pokemon" component={PokemonPage} />
-            <Route path="/types" component={TypesPage} />
-            <Route component={MissingPage} />
-          </Switch>
+          <Container className="root">
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/pokemon" component={PokemonPage} />
+              <Route path="/types" component={TypesPage} />
+              <Route component={MissingPage} />
+            </Switch>
+          </Container>
+          <Footer />
         </>
       </BrowserRouter>
     );

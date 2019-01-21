@@ -64,11 +64,11 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
     }
 
     return (
-      <Container>
+      <Segment vertical>
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Header as="h2">Defender</Header>
+              <Header as="h2">Defender Info</Header>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -83,7 +83,7 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
           </Grid.Row>
           <PokemonDetails pokemon={pokemon} />
         </Grid>
-      </Container>
+      </Segment>
     );
   }
 }
