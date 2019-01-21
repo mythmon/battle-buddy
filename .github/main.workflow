@@ -12,7 +12,7 @@ action "yarn install" {
 }
 
 action "yarn deploy" {
-  uses = "mythmon/npm@fb6b77bf2154131f58a5dd65b67cc5c6ad50e2f6"
+  uses = "mythmon/npm@3d79866426281a617db26e2e5b8218ad0dd56776"
   runs = "yarn"
   args = "deploy"
   secrets = ["GITHUB_TOKEN"]
