@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "d17eaae0af3919c806b4",
-    "url": "/battle-buddy/static/css/main.c14f372d.chunk.css"
+    "revision": "632435cafb0caaa4a728",
+    "url": "/battle-buddy/static/css/main.3569ae77.chunk.css"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
     "url": "/battle-buddy/static/media/brand-icons.a1a749e8.svg"
   },
   {
-    "revision": "a82f0e94709c18207918",
-    "url": "/battle-buddy/static/js/1.a82f0e94.chunk.js"
+    "revision": "4cc5142ade2a957f0431",
+    "url": "/battle-buddy/static/js/1.4cc5142a.chunk.js"
   },
   {
     "revision": "0e32d45840d88bcfc164",
@@ -28,10 +28,6 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/outline-icons.ef60a4f6.woff"
   },
   {
-    "revision": "9c74e172f87984c48ddf5c8108cabe67",
-    "url": "/battle-buddy/static/media/flags.9c74e172.png"
-  },
-  {
     "revision": "701ae6abd4719e9c2ada3535a497b341",
     "url": "/battle-buddy/static/media/outline-icons.701ae6ab.eot"
   },
@@ -40,12 +36,16 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/outline-icons.ad97afd3.ttf"
   },
   {
+    "revision": "9c74e172f87984c48ddf5c8108cabe67",
+    "url": "/battle-buddy/static/media/flags.9c74e172.png"
+  },
+  {
     "revision": "0ab54153eeeca0ce03978cc463b257f7",
     "url": "/battle-buddy/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "d17eaae0af3919c806b4",
-    "url": "/battle-buddy/static/js/main.d17eaae0.chunk.js"
+    "revision": "632435cafb0caaa4a728",
+    "url": "/battle-buddy/static/js/main.632435ca.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
-    "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
-  },
-  {
     "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
     "url": "/battle-buddy/static/media/icons.8e3c7f55.eot"
+  },
+  {
+    "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
+    "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -80,11 +80,11 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.962a1bf3.svg"
   },
   {
-    "revision": "a82f0e94709c18207918",
-    "url": "/battle-buddy/static/css/1.66a526d1.chunk.css"
+    "revision": "4cc5142ade2a957f0431",
+    "url": "/battle-buddy/static/css/1.0f6ed8ec.chunk.css"
   },
   {
-    "revision": "e568dadf2b5c64c1568ddce7ff369f6b",
+    "revision": "9ce0d44ed3a7b115d8faee9a359836b8",
     "url": "/battle-buddy/index.html"
   }
 ];
