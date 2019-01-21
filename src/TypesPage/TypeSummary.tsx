@@ -1,9 +1,12 @@
 import React from "react";
-import { Grid, Card, Dimmer, Loader } from "semantic-ui-react";
+import { Grid, Card, Dimmer, Loader, List, Label } from "semantic-ui-react";
 import { Map } from "immutable";
+import cx from "classnames";
 
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
+import TypeBadge from "../components/TypeBadge";
+import "./style.css";
 
 interface TypeSummaryProps {
   types: Array<string>;
@@ -63,7 +66,7 @@ export default class TypeSummary extends React.Component<
         multipliers = multipliers.set(attackType, 0);
       }
     }
-    return multipliers;
+    return multipliers.filter(m => m !== 1);
   }
 
   render() {
@@ -102,15 +105,56 @@ export default class TypeSummary extends React.Component<
           </Card.Header>
         </Card.Content>
         <Card.Content>
-          <ul>
-            {multipliers.map(({ type, multiplier }) => (
-              <li key={type}>
-                {type}: {multiplier}x
-              </li>
-            ))}
-          </ul>
+          <List>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={8}>
+                  {multipliers
+                    .filter(({ multiplier }) => multiplier >= 1)
+                    .map(({ type, multiplier }) => (
+                      <List.Item key={type} className="type-multiplier">
+                        <TypeBadge type={type} />
+                        <MultiplierBadge by={multiplier} />
+                      </List.Item>
+                    ))}
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  {multipliers
+                    .filter(({ multiplier }) => multiplier < 1)
+                    .map(({ type, multiplier }) => (
+                      <List.Item key={type} className="type-multiplier">
+                        <TypeBadge type={type} />
+                        <MultiplierBadge by={multiplier} />
+                      </List.Item>
+                    ))}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </List>
         </Card.Content>
       </Card>
     );
   }
+}
+
+function MultiplierBadge({ by }) {
+  let { text = by.toString(), color, fraction = false } = {
+    "4": { text: "4x", color: "blue" },
+    "2": { text: "2x", color: "green" },
+    "1": { text: "1x" },
+    "0.5": { text: "½", color: "red", fraction: true },
+    "0.25": { text: "¼", color: "purple", fraction: true },
+    "0": { text: "0x", color: "black" }
+  }[by.toString()];
+
+  return (
+    <Label
+      className={cx("multiplier-badge", { fraction })}
+      circular
+      size="large"
+      color={color}
+    >
+      <span>{text}</span>
+    </Label>
+  );
 }

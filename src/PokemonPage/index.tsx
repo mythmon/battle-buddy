@@ -18,6 +18,7 @@ import _get from "lodash-es/get";
 
 import pokeapi from "../pokeapi";
 import TypeSummary from "../TypesPage/TypeSummary";
+import TypeBadge from "../components/TypeBadge";
 import "./style.css";
 
 interface PokemonPageState {
@@ -37,7 +38,8 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
   state = {
     loading: true,
     pokedex: null,
-    pokemon: null
+    // pokemon: null
+    pokemon: "charizard"
   };
 
   constructor(props) {
@@ -298,11 +300,4 @@ function PokemonInfo({ species, variety }) {
       )}
     </Card.Content>
   );
-}
-
-class TypeBadge extends React.Component<{ type: string }> {
-  render() {
-    const { type } = this.props;
-    return <Label>{titleCase(type)}</Label>;
-  }
 }
