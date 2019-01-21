@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "6726c1cc4158c8d8de4c",
+    "revision": "8c2f7e17256d5cad78b7",
     "url": "/battle-buddy/static/css/main.4147b8b7.chunk.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/js/runtime~main.0e32d458.js"
   },
   {
-    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
-    "url": "/battle-buddy/static/media/outline-icons.ef60a4f6.woff"
-  },
-  {
     "revision": "cd6c777f1945164224dee082abaea03a",
     "url": "/battle-buddy/static/media/outline-icons.cd6c777f.woff2"
+  },
+  {
+    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
+    "url": "/battle-buddy/static/media/outline-icons.ef60a4f6.woff"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "6726c1cc4158c8d8de4c",
-    "url": "/battle-buddy/static/js/main.6726c1cc.chunk.js"
+    "revision": "8c2f7e17256d5cad78b7",
+    "url": "/battle-buddy/static/js/main.8c2f7e17.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
-    "url": "/battle-buddy/static/media/icons.8e3c7f55.eot"
-  },
-  {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
+  },
+  {
+    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
+    "url": "/battle-buddy/static/media/icons.8e3c7f55.eot"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -84,7 +84,7 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/css/1.e3f9f2be.chunk.css"
   },
   {
-    "revision": "d6bb7b8e58c1f032b20c7b855a6d897d",
+    "revision": "7e834538a53aea5467a73ef8069d1ab5",
     "url": "/battle-buddy/index.html"
   }
 ];
