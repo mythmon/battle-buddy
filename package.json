@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
+    "deploy": "yarn ci-deploy",
+    "ci-deploy": "gh-pages -d build",
     "lint": "yarn lint-ts",
     "lint-ts": "tslint -c tslint.json 'src/**/*{ts,tsx}'"
   },
