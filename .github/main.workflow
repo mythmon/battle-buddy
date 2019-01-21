@@ -1,7 +1,7 @@
 workflow "Deploy" {
   on = "push"
   resolves = [
-    "yarn deploy",
+    "deploy",
   ]
 }
 
@@ -15,6 +15,6 @@ action "deploy" {
   args = "run deploy"
   secrets = ["GITHUB_TOKEN"]
   needs = [
-    "yarn install",
+    "install",
   ]
 }
