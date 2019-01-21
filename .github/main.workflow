@@ -11,7 +11,7 @@ action "install" {
 }
 
 action "deploy" {
-  uses = "mythmon/npm@9fdff2785a2f5b7f7d28f636c85ba2c40b1a88a8"
+  uses = "mythmon/npm@9fd705a7b7fe8cc792d1ab5fd694cbf69b92fc20"
   args = "run deploy"
   secrets = ["GITHUB_TOKEN"]
   needs = [
