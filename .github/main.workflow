@@ -1,7 +1,7 @@
 workflow "Test and deploy" {
   on = "push"
   resolves = [
-    "yarn deploy"
+    "yarn deploy",
   ]
 }
 
@@ -18,6 +18,9 @@ action "yarn test" {
   needs = [
     "yarn install",
   ]
+  env = {
+    CI = "1"
+  }
 }
 
 action "yarn deploy" {
@@ -26,6 +29,6 @@ action "yarn deploy" {
   args = "deploy"
   secrets = ["GITHUB_TOKEN"]
   needs = [
-    "yarn test"
+    "yarn test",
   ]
 }
