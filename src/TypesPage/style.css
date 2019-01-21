@@ -12,10 +12,10 @@
   height: 1.9rem;
   line-height: 1rem;
   position: relative;
+  font-weight: 200;
 }
 
 .ui.label.multiplier-badge.fraction span {
   transform: scale(1.4);
-  font-weight: 100;
   display: block;
 }

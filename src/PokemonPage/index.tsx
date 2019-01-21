@@ -38,8 +38,7 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
   state = {
     loading: true,
     pokedex: null,
-    // pokemon: null
-    pokemon: "charizard"
+    pokemon: null
   };
 
   constructor(props) {
