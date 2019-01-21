@@ -6,6 +6,7 @@ import "./App.css";
 import TypesPage from "./TypesPage/index";
 import Header from "./components/Header";
 import MissingPage from "./MissingPage";
+import PokemonPage from "./PokemonPage";
 
 export default class App extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends Component {
               <Redirect to="/types" />
             </Route>
             <Route path="/types" component={TypesPage} />
+            <Route path="/pokemon" component={PokemonPage} />
             <Route component={MissingPage} />
           </Switch>
         </>

@@ -1,6 +1,6 @@
 import { Pokedex } from "pokeapi-js-wrapper";
 
-const pokedex = new Pokedex({
+const pokeapi = new Pokedex({
   protocol: "https"
 });
-export default pokedex;
+export default pokeapi;
