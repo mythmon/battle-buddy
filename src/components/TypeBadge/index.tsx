@@ -7,7 +7,7 @@ import "./style.css";
 export default class TypeBadge extends React.Component<{
   type: string;
 }> {
-  render() {
+  public render() {
     const { type } = this.props;
     return (
       <Label className={`type ${type}`}>

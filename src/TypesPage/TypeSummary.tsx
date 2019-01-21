@@ -1,15 +1,15 @@
-import React from "react";
-import { Grid, Card, Dimmer, Loader, List, Label } from "semantic-ui-react";
-import { Map } from "immutable";
 import cx from "classnames";
+import { Map } from "immutable";
+import React from "react";
+import { Card, Dimmer, Grid, Label, List, Loader } from "semantic-ui-react";
 
+import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
-import TypeBadge from "../components/TypeBadge";
 import "./style.css";
 
 interface TypeSummaryProps {
-  types: Array<string>;
+  types: string[];
 }
 
 interface TypeSummaryState {
@@ -17,45 +17,47 @@ interface TypeSummaryState {
   loading: boolean;
 }
 
-interface TypeData {}
+interface TypeData {
+  name: string;
+}
 
 export default class TypeSummary extends React.Component<
   TypeSummaryProps,
   TypeSummaryState
 > {
-  state = {
+  public state = {
+    loading: false,
     typeData: {},
-    loading: false
   };
 
-  async fetchTypeData(types = this.props.types) {
+  public async fetchTypeData(types = this.props.types) {
     for (const type of types) {
       if (this.state.typeData[type]) {
         continue;
       }
       this.setState({ loading: true });
-      let newTypeData = { ...this.state.typeData };
+      const newTypeData = { ...this.state.typeData };
       newTypeData[type] = await pokeapi.getTypeByName(type);
       this.setState({ typeData: newTypeData });
     }
     this.setState({ loading: false });
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.fetchTypeData();
   }
 
-  componentWillReceiveProps(newProps) {
+  public componentWillReceiveProps(newProps) {
     this.fetchTypeData(newProps.types);
   }
 
-  calcDamageMultipliers(): Map<string, number> {
+  public calcDamageMultipliers(): Map<string, number> {
     let multipliers: Map<string, number> = Map();
     for (const defenseType of this.props.types) {
       if (!this.state.typeData[defenseType]) {
         continue;
       }
-      let { damage_relations } = this.state.typeData[defenseType];
+      const { damage_relations } = this.state.typeData[defenseType];
       for (const { name: attackType } of damage_relations.double_damage_from) {
         multipliers = multipliers.update(attackType, 1, (v: number) => v * 2);
       }
@@ -69,11 +71,11 @@ export default class TypeSummary extends React.Component<
     return multipliers.filter(m => m !== 1);
   }
 
-  render() {
+  public render() {
     const { types } = this.props;
     const { loading } = this.state;
 
-    let multipliers = this.calcDamageMultipliers()
+    const multipliers = this.calcDamageMultipliers()
       .entrySeq()
       .map(([type, multiplier]) => ({ type, multiplier }))
       .sort((a, b) => {
@@ -88,7 +90,7 @@ export default class TypeSummary extends React.Component<
       .toJS();
 
     return (
-      <Card fluid>
+      <Card fluid={true}>
         <Dimmer active={loading}>
           <Loader active={loading} />
         </Dimmer>
@@ -138,19 +140,19 @@ export default class TypeSummary extends React.Component<
 }
 
 function MultiplierBadge({ by }) {
-  let { text = by.toString(), color, fraction = false } = {
-    "4": { text: "4x", color: "blue" },
-    "2": { text: "2x", color: "green" },
-    "1": { text: "1x" },
-    "0.5": { text: "½", color: "red", fraction: true },
+  const { text = by.toString(), color, fraction = false } = {
+    "0": { text: "0x", color: "black" },
     "0.25": { text: "¼", color: "purple", fraction: true },
-    "0": { text: "0x", color: "black" }
+    "0.5": { text: "½", color: "red", fraction: true },
+    "1": { text: "1x" },
+    "2": { text: "2x", color: "green" },
+    "4": { text: "4x", color: "blue" },
   }[by.toString()];
 
   return (
     <Label
       className={cx("multiplier-badge", { fraction })}
-      circular
+      circular={true}
       size="large"
       color={color}
     >

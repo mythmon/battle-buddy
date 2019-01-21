@@ -1,0 +1,21 @@
+actions:
+  tslint:
+    run: yarn tslint -c tslint.json {files}
+    fix: yarn tslint --fix -c tslint.json {files}
+    include:
+      - "*.ts"
+      - "*.tsx"
+shortcuts:
+  lint:
+    flags:
+      - include-unstaged
+      - include-untracked
+  "lint:all":
+    extends: lint
+    flags: use-tracked-files
+  fix:
+    extends: lint
+    flags: fix
+  "fix:all":
+    extends: fix
+    flags: use-tracked-files

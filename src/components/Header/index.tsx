@@ -1,6 +1,6 @@
 import React from "react";
-import { Image, Menu, Container, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { Container, Icon, Image, Menu } from "semantic-ui-react";
 
 import "./style.css";
 
@@ -9,8 +9,8 @@ export default function Header() {
   return (
     <Menu
       className="top-nav"
-      inverted
-      borderless
+      inverted={true}
+      borderless={true}
       color="red"
       style={{ borderRadius: 0 }}
     >
@@ -26,7 +26,7 @@ export default function Header() {
           Types
         </Menu.Item>
         <Menu.Item
-          icon
+          icon={true}
           position="right"
           as="a"
           href="https://github.com/mythmon/battle-buddy"

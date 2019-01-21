@@ -1,21 +1,21 @@
 import React from "react";
 import {
   Container,
-  Loader,
   Dropdown,
   Grid,
   Header,
+  Icon,
+  Loader,
   Segment,
-  Icon
 } from "semantic-ui-react";
 
-import TypeSummary from "./TypeSummary";
-import { titleCase } from "../utils";
 import pokeapi from "../pokeapi";
+import { titleCase } from "../utils";
+import TypeSummary from "./TypeSummary";
 
 interface TypesPageState {
-  typeList: null | Array<PokedexType>;
-  types: Array<string>;
+  typeList: null | PokedexType[];
+  types: string[];
 }
 
 interface PokedexType {
@@ -23,26 +23,26 @@ interface PokedexType {
 }
 
 export default class TypesPage extends React.Component<{}, TypesPageState> {
-  state = {
+  public state = {
     typeList: null,
-    types: [null, null]
+    types: [null, null],
   };
 
-  async componentDidMount() {
+  public async componentDidMount() {
     if (this.state.typeList === null) {
       const data = await pokeapi.getTypesList();
       this.setState({ typeList: data.results });
     }
   }
 
-  handleTypes(index) {
+  public handleTypes(index) {
     if (index < 0 || index > 1) {
       throw new Error(`Invalid index ${index}`);
     }
     return (e, { value }: { value: string }) => {
       this.setState(state => {
         state.types[index] = value;
-        let newTypes = state.types.filter(t => !!t);
+        const newTypes = state.types.filter(t => !!t);
         while (newTypes.length < 2) {
           newTypes.push(null);
         }
@@ -51,15 +51,15 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
     };
   }
 
-  render() {
+  public render() {
     const { types, typeList } = this.state;
 
     if (typeList === null) {
-      return <Loader active />;
+      return <Loader active={true} />;
     }
 
     return (
-      <Segment vertical>
+      <Segment vertical={true}>
         <Grid>
           <Grid.Row>
             <Grid.Column>
@@ -89,8 +89,8 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
               {types && types.some(t => !!t) ? (
                 <TypeSummary types={types.filter(t => !!t)} />
               ) : (
-                <Segment placeholder>
-                  <Header icon>
+                <Segment placeholder={true}>
+                  <Header icon={true}>
                     <Icon name="search" />
                     Search for a type to begin
                   </Header>
@@ -107,18 +107,18 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
 function TypeDropdown({ value, typeList, onChange, placeholder }) {
   const typeDropdownOptions = typeList.map(type => ({
     key: type.name,
+    text: titleCase(type.name),
     value: type.name,
-    text: titleCase(type.name)
   }));
 
   return (
     <Dropdown
-      compact
-      fluid
+      compact={true}
+      fluid={true}
       placeholder={placeholder}
-      search
-      selection
-      clearable
+      search={true}
+      selection={true}
+      clearable={true}
       options={typeDropdownOptions}
       onChange={onChange}
       value={value}
