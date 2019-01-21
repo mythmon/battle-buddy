@@ -1,0 +1,119 @@
+.label.type {
+  min-width: 64px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/*
+ * Low resolution displays, like laptops, need more text shadow than high
+ * resolution displays, like phones.
+ */
+@media (min-resolution: 200dpi) {
+  .label.type .inner {
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+  }
+}
+@media (max-resolution: 200dpi) {
+  .label.type .inner {
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.label.type .inner {
+  transform-origin: left;
+  display: block;
+}
+
+.label.type.normal {
+  background-color: #aa9;
+}
+
+.label.type.fire {
+  background-color: #f42;
+}
+
+.label.type.water {
+  background-color: #39f;
+}
+
+.label.type.electric {
+  background-color: #fc3;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.label.type.electric .inner {
+  transform: scale(0.9, 1);
+  width: 45px;
+}
+
+.label.type.grass {
+  background-color: #7c5;
+}
+
+.label.type.ice {
+  background-color: #6cf;
+}
+
+.label.type.fighting {
+  background-color: #b54;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.label.type.fighting .inner {
+  transform: scale(0.85, 1);
+  width: 48px;
+}
+
+.label.type.poison {
+  background-color: #a59;
+}
+
+.label.type.ground {
+  background-color: #db5;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.label.type.ground .inner {
+  transform: scale(0.9, 1);
+  width: 45px;
+}
+
+.label.type.flying {
+  background-color: #89f;
+}
+
+.label.type.psychic {
+  background-color: #f59;
+}
+
+.label.type.bug {
+  background-color: #ab2;
+}
+
+.label.type.rock {
+  background-color: #ba6;
+}
+
+.label.type.ghost {
+  background-color: #66b;
+}
+
+.label.type.dragon {
+  background-color: #76e;
+}
+
+.label.type.dark {
+  background-color: #754;
+}
+
+.label.type.steel {
+  background-color: #aab;
+}
+
+.label.type.fairy {
+  background-color: #e9e;
+}

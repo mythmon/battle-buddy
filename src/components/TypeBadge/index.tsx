@@ -1,13 +1,18 @@
 import React from "react";
 import { Label } from "semantic-ui-react";
 
-import { titleCase } from "../utils";
+import { titleCase } from "../../utils";
+import "./style.css";
 
 export default class TypeBadge extends React.Component<{
   type: string;
 }> {
   render() {
     const { type } = this.props;
-    return <Label style={{ minWidth: 64 }}>{titleCase(type)}</Label>;
+    return (
+      <Label className={`type ${type}`}>
+        <span className="inner">{titleCase(type)}</span>
+      </Label>
+    );
   }
 }
