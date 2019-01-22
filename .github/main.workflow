@@ -24,10 +24,10 @@ action "lint" {
 
 action "deploy" {
   uses = "mythmon/npm@9fd705a7b7fe8cc792d1ab5fd694cbf69b92fc20"
-  args = "run ci-deploy"
-  secrets = ["GITHUB_TOKEN"]
+  args = "run ci-deploy -- --silent"
   needs = [
     "build",
-    "lint"
+    "lint",
   ]
+  secrets = ["GHPAGES_REPO"]
 }
