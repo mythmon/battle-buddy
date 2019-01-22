@@ -1,6 +1,6 @@
 import _get from "lodash-es/get";
 import React from "react";
-import { Dropdown, Grid, Header, Loader, Segment } from "semantic-ui-react";
+import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
 import { titleCase } from "../utils";
 
 import pokeapi from "../pokeapi";
@@ -45,14 +45,11 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
   }
 
   public render() {
-    const { loading, pokemon, pokedex } = this.state;
-    if (loading) {
-      return <Loader active={true} />;
-    }
+    const { pokemon, pokedex } = this.state;
 
     return (
       <Segment vertical={true}>
-        <Grid>
+        <Grid stackable={true}>
           <Grid.Row>
             <Grid.Column>
               <Header as="h2">Defender Info</Header>
@@ -68,7 +65,9 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
               />
             </Grid.Column>
           </Grid.Row>
-          <PokemonDetails pokemon={pokemon} />
+          <Grid.Row stretched={true}>
+            <PokemonDetails pokemon={pokemon} />
+          </Grid.Row>
         </Grid>
       </Segment>
     );
@@ -86,11 +85,18 @@ function PokemonDropdown({
   value: string;
   placeholder?: string;
 }) {
-  const options = pokedex.map(pokemon => ({
-    key: pokemon.pokemon_species.name,
-    text: titleCase(pokemon.pokemon_species.name),
-    value: pokemon.pokemon_species.name,
-  }));
+  let options;
+  if (pokedex) {
+    options = pokedex.map(pokemon => ({
+      key: pokemon.pokemon_species.name,
+      text: titleCase(pokemon.pokemon_species.name),
+      value: pokemon.pokemon_species.name,
+    }));
+  } else if (value) {
+    options = [{ key: value, text: titleCase(value), value }];
+  } else {
+    options = [];
+  }
 
   return (
     <Dropdown

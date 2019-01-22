@@ -1,7 +1,7 @@
 import cx from "classnames";
 import { Map } from "immutable";
 import React from "react";
-import { Card, Dimmer, Grid, Label, List, Loader } from "semantic-ui-react";
+import { Card, Dimmer, Grid, Label, List } from "semantic-ui-react";
 
 import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
@@ -91,9 +91,6 @@ export default class TypeSummary extends React.Component<
 
     return (
       <Card fluid={true}>
-        <Dimmer active={loading}>
-          <Loader active={loading} />
-        </Dimmer>
         <Card.Content>
           <Card.Header>
             {types.length > 0 && (

@@ -6,7 +6,6 @@ import {
   Header,
   Icon,
   Image,
-  Loader,
   Segment,
 } from "semantic-ui-react";
 
@@ -83,28 +82,26 @@ export default class PokemonDetails extends React.Component<
 
     return (
       <>
-        <Grid.Row>
-          <Grid.Column>
-            <Dimmer.Dimmable
-              as={Card}
-              fluid={true}
-              dimmed={loading}
-              blurring={true}
-            >
-              <Dimmer active={loading} inverted={true}>
-                <Loader />
-              </Dimmer>
-              <PokemonInfo species={speciesDetails} variety={variety} />
-            </Dimmer.Dimmable>
+        {!variety && !speciesDetails && (
+          <Grid.Column width={16}>
+            <Segment placeholder={true}>
+              <Header icon={true}>
+                <Icon name="search" />
+                Search for a defending pokemon to begin
+              </Header>
+            </Segment>
           </Grid.Column>
-        </Grid.Row>
-        {variety && (
-          <Grid.Row>
-            <Grid.Column>
-              <TypeSummary types={variety.types.map(t => t.type.name)} />
-            </Grid.Column>
-          </Grid.Row>
         )}
+        <Grid.Column width={8}>
+          {speciesDetails && variety && (
+            <PokemonInfo species={speciesDetails} variety={variety} />
+          )}
+        </Grid.Column>
+        <Grid.Column width={8}>
+          {variety && (
+            <TypeSummary types={variety.types.map(t => t.type.name)} />
+          )}
+        </Grid.Column>
       </>
     );
   }
@@ -112,59 +109,53 @@ export default class PokemonDetails extends React.Component<
 
 function PokemonInfo({ species, variety }) {
   return (
-    <Card.Content>
-      {!variety && !species && (
-        <Segment placeholder={true}>
-          <Header icon={true}>
-            <Icon name="search" />
-            Search for a defending pokemon to begin
-          </Header>
-        </Segment>
-      )}
-      {variety && (
-        <Image
-          className="pokemon-sprite"
-          floated="left"
-          src={variety.sprites.front_default}
-        />
-      )}
-      {species && (
-        <>
-          <Card.Header>
-            #
-            {
-              keyedValue(species.pokedex_numbers, {
-                "pokedex.name": "kanto",
-              }).entry_number
-            }{" "}
-            -{" "}
-            {
-              keyedValue(species.names, {
-                "language.name": "en",
-              }).name
-            }
-          </Card.Header>
-          <Card.Meta>
-            {
-              keyedValue(species.genera, {
-                "language.name": "en",
-              }).genus
-            }
-          </Card.Meta>
-        </>
-      )}
-      {variety &&
-        variety.types.map(({ slot, type: { name } }) => (
-          <TypeBadge key={slot} type={name} />
-        ))}
-      {species && (
-        <Card.Description>
-          {keyedValue(species.flavor_text_entries, {
-            "language.name": "en",
-            "version.name": "yellow",
-          }).flavor_text.replace("\u000C", " ")}
-        </Card.Description>
-      )}
-    </Card.Content>
+    <Card fluid={true}>
+      <Card.Content>
+        {variety && (
+          <Image
+            className="pokemon-sprite"
+            floated="left"
+            src={variety.sprites.front_default}
+          />
+        )}
+        {species && (
+          <>
+            <Card.Header>
+              #
+              {
+                keyedValue(species.pokedex_numbers, {
+                  "pokedex.name": "kanto",
+                }).entry_number
+              }{" "}
+              -{" "}
+              {
+                keyedValue(species.names, {
+                  "language.name": "en",
+                }).name
+              }
+            </Card.Header>
+            <Card.Meta>
+              {
+                keyedValue(species.genera, {
+                  "language.name": "en",
+                }).genus
+              }
+            </Card.Meta>
+          </>
+        )}
+        {variety &&
+          variety.types.map(({ slot, type: { name } }) => (
+            <TypeBadge key={slot} type={name} />
+          ))}
+        {species && (
+          <Card.Description>
+            {keyedValue(species.flavor_text_entries, {
+              "language.name": "en",
+              "version.name": "yellow",
+            }).flavor_text.replace("\u000C", " ")}
+          </Card.Description>
+        )}
+      </Card.Content>
+    </Card>
   );
 }

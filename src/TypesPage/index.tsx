@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Dropdown,
-  Grid,
-  Header,
-  Icon,
-  Loader,
-  Segment,
-} from "semantic-ui-react";
+import { Dropdown, Grid, Header, Icon, Segment } from "semantic-ui-react";
 
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
@@ -53,10 +45,6 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
 
   public render() {
     const { types, typeList } = this.state;
-
-    if (typeList === null) {
-      return <Loader active={true} />;
-    }
 
     return (
       <Segment vertical={true}>
@@ -105,11 +93,21 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
 }
 
 function TypeDropdown({ value, typeList, onChange, placeholder }) {
-  const typeDropdownOptions = typeList.map(type => ({
-    key: type.name,
-    text: titleCase(type.name),
-    value: type.name,
-  }));
+  let options;
+  if (typeList) {
+    options = typeList.map(type => ({
+      key: type.name,
+      text: titleCase(type.name),
+      value: type.name,
+    }));
+  } else if (value) {
+    options = [{ key: value, text: titleCase(value), value }];
+  } else {
+    options = [];
+  }
+  options.sort((a: { text: string }, b: { text: string }) =>
+    a.text.localeCompare(b.text),
+  );
 
   return (
     <Dropdown
@@ -119,7 +117,7 @@ function TypeDropdown({ value, typeList, onChange, placeholder }) {
       search={true}
       selection={true}
       clearable={true}
-      options={typeDropdownOptions}
+      options={options}
       onChange={onChange}
       value={value}
     />
