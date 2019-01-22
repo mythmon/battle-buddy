@@ -24,7 +24,7 @@ action "lint" {
 
 action "deploy" {
   uses = "mythmon/npm@9fd705a7b7fe8cc792d1ab5fd694cbf69b92fc20"
-  args = "run ci-deploy -- --silent"
+  args = "run ci-deploy -- --silent --repo $GHPAGES_REPO"
   needs = [
     "build",
     "lint",
