@@ -1,23 +1,33 @@
+import { History, Location } from "history";
 import React from "react";
+import { match as matchType, withRouter } from "react-router-dom";
 import { Dropdown, Grid, Header, Icon, Segment } from "semantic-ui-react";
 
+import ErrorDisplay, { ErrorDetail } from "../components/ErrorDisplay";
+import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
 import TypeSummary from "./TypeSummary";
 
+interface TypesPageProps {
+  match: matchType<{ types?: string }>;
+  location: Location;
+  history: History;
+}
+
 interface TypesPageState {
+  error: null | ErrorDetail;
   typeList: null | PokedexType[];
-  types: string[];
 }
 
 interface PokedexType {
   name: string;
 }
 
-export default class TypesPage extends React.Component<{}, TypesPageState> {
+class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
   public state = {
+    error: null,
     typeList: null,
-    types: [null, null],
   };
 
   public async componentDidMount() {
@@ -25,26 +35,30 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
       const data = await pokeapi.getTypesList();
       this.setState({ typeList: data.results });
     }
+    this.checkTypes();
+  }
+
+  public componentWillReceiveProps(newProps) {
+    this.checkTypes(newProps);
   }
 
   public handleTypes(index) {
     if (index < 0 || index > 1) {
       throw new Error(`Invalid index ${index}`);
     }
-    return (e, { value }: { value: string }) => {
-      this.setState(state => {
-        state.types[index] = value;
-        const newTypes = state.types.filter(t => !!t);
-        while (newTypes.length < 2) {
-          newTypes.push(null);
-        }
-        return { types: newTypes };
-      });
+    return (_event, { value }: { value: string }) => {
+      const { match, history } = this.props;
+      let types = (match.params.types || "").split(",");
+      types[index] = value;
+      types = types.filter(t => !!t);
+      const newUrl = match.path.replace(":types?", types.join(","));
+      history.push(newUrl);
     };
   }
 
   public render() {
-    const { types, typeList } = this.state;
+    const { typeList, error } = this.state;
+    const types = this.getTypes();
 
     return (
       <Segment vertical={true}>
@@ -74,8 +88,13 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              {types && types.some(t => !!t) ? (
-                <TypeSummary types={types.filter(t => !!t)} />
+              {error ? (
+                <ErrorDisplay error={error} />
+              ) : types.length > 0 ? (
+                <>
+                  <div data-types={JSON.stringify(types)} />
+                  <TypeSummary types={types} />
+                </>
               ) : (
                 <Segment placeholder={true}>
                   <Header icon={true}>
@@ -90,7 +109,41 @@ export default class TypesPage extends React.Component<{}, TypesPageState> {
       </Segment>
     );
   }
+
+  private getTypes({ match } = this.props) {
+    return (match.params.types || "")
+      .split(",")
+      .slice(0, 2)
+      .filter(t => !!t);
+  }
+
+  private checkTypes(props = this.props) {
+    const { typeList } = this.state;
+    if (!typeList) {
+      return;
+    }
+    const types = this.getTypes(props);
+    for (const type of types) {
+      if (!typeList.some(typeDefinition => typeDefinition.name === type)) {
+        // tslint:disable-next-line: no-console
+        console.error("Invalid type:", type, "not included in", typeList);
+        this.setState({
+          error: {
+            description: (
+              <>
+                <TypeBadge type={type} /> isn't a valid type
+              </>
+            ),
+          },
+        });
+        return;
+      }
+    }
+    this.setState({ error: null });
+  }
 }
+
+export default withRouter(TypesPage);
 
 function TypeDropdown({ value, typeList, onChange, placeholder }) {
   let options;
@@ -100,10 +153,11 @@ function TypeDropdown({ value, typeList, onChange, placeholder }) {
       text: titleCase(type.name),
       value: type.name,
     }));
-  } else if (value) {
-    options = [{ key: value, text: titleCase(value), value }];
   } else {
     options = [];
+  }
+  if (value && !options.some(o => o.value === value)) {
+    options.push({ key: value, text: titleCase(value), value });
   }
   options.sort((a: { text: string }, b: { text: string }) =>
     a.text.localeCompare(b.text),

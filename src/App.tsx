@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "semantic-ui-css/semantic.css";
 import { Container } from "semantic-ui-react";
@@ -22,8 +22,8 @@ export default class App extends Component {
           <Container className="root">
             <Switch>
               <Route exact={true} path="/" component={HomePage} />
-              <Route path="/pokemon" component={PokemonPage} />
-              <Route path="/types" component={TypesPage} />
+              <Route path="/pokemon/:name?" component={PokemonPage} />
+              <Route path="/types/:types?" component={TypesPage} />
               <Route component={MissingPage} />
             </Switch>
           </Container>

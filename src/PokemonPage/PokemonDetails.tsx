@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 
 import { PokemonSpecies, PokemonVariety } from ".";
+import ErrorDisplay from "../components/ErrorDisplay";
 import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
 import TypeSummary from "../TypesPage/TypeSummary";
@@ -24,6 +25,10 @@ interface PokemonDetailsState {
   speciesDetails: null | PokemonSpecies;
   varieties: { [name: string]: PokemonVariety };
   chosenVariety: null | string;
+  error: null | {
+    source: any;
+    description: string;
+  };
 }
 
 export default class PokemonDetails extends React.Component<
@@ -32,6 +37,7 @@ export default class PokemonDetails extends React.Component<
 > {
   public state = {
     chosenVariety: null,
+    error: null,
     loading: false,
     speciesDetails: null,
     varieties: {},
@@ -41,30 +47,45 @@ export default class PokemonDetails extends React.Component<
     if (!pokemon) {
       return;
     }
-    this.setState({ loading: true });
-    const speciesDetails = await pokeapi.getPokemonSpeciesByName(pokemon);
-    this.setState({ speciesDetails });
+    try {
+      this.setState({ loading: true });
+      const speciesDetails = await pokeapi.getPokemonSpeciesByName(pokemon);
+      this.setState({ speciesDetails });
 
-    let chosenVariety = null;
+      let chosenVariety = null;
 
-    const varietyPromises = speciesDetails.varieties.map(
-      async ({ is_default, pokemon: variety }) => {
-        if (is_default) {
-          chosenVariety = variety.name;
-        }
-        return pokeapi.getPokemonByName(variety.name);
-      },
-    );
-    const varieties = {};
-    for (const varietyPromise of varietyPromises) {
-      const variety = await varietyPromise;
-      varieties[variety.name] = variety;
+      const varietyPromises = speciesDetails.varieties.map(
+        async ({ is_default, pokemon: variety }) => {
+          if (is_default) {
+            chosenVariety = variety.name;
+          }
+          return pokeapi.getPokemonByName(variety.name);
+        },
+      );
+      const varieties = {};
+      for (const varietyPromise of varietyPromises) {
+        const variety = await varietyPromise;
+        varieties[variety.name] = variety;
+      }
+      if (!chosenVariety) {
+        chosenVariety = await varietyPromises[0].name;
+      }
+
+      this.setState({ loading: false, varieties, chosenVariety, error: null });
+    } catch (err) {
+      // tslint:disable-next-line: no-console
+      console.error(err);
+      this.setState({
+        chosenVariety: null,
+        error: {
+          description: "Could not load pokemon information.",
+          source: err,
+        },
+        loading: false,
+        speciesDetails: null,
+        varieties: {},
+      });
     }
-    if (!chosenVariety) {
-      chosenVariety = await varietyPromises[0].name;
-    }
-
-    this.setState({ loading: false, varieties, chosenVariety });
   }
 
   public componentDidMount() {
@@ -76,13 +97,14 @@ export default class PokemonDetails extends React.Component<
   }
 
   public render() {
-    const { loading, speciesDetails, varieties, chosenVariety } = this.state;
+    const { pokemon } = this.props;
+    const { error, speciesDetails, varieties, chosenVariety } = this.state;
 
     const variety = varieties && varieties[chosenVariety];
 
     return (
       <>
-        {!variety && !speciesDetails && (
+        {!pokemon && (
           <Grid.Column width={16}>
             <Segment placeholder={true}>
               <Header icon={true}>
@@ -90,6 +112,11 @@ export default class PokemonDetails extends React.Component<
                 Search for a defending pokemon to begin
               </Header>
             </Segment>
+          </Grid.Column>
+        )}
+        {error && (
+          <Grid.Column width={16}>
+            <ErrorDisplay error={error} />
           </Grid.Column>
         )}
         <Grid.Column width={8}>

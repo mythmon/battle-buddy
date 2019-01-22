@@ -4,6 +4,12 @@
   "rules": {
     "prettier": true,
     "interface-name": false,
-    "trailing-comma": [true, { "singleline": "never", "multiline": "always" }]
+    "trailing-comma": [true, { "singleline": "never", "multiline": "always" }],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore",
+      "ban-keywords"
+    ]
   }
 }

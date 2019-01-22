@@ -10,7 +10,7 @@ export default class TypeBadge extends React.Component<{
   public render() {
     const { type } = this.props;
     return (
-      <Label className={`type ${type}`}>
+      <Label as="span" className={`type ${type}`}>
         <span className="inner">{titleCase(type)}</span>
       </Label>
     );

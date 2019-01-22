@@ -2,7 +2,7 @@
   min-width: 64px;
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
+  color: #000;
 }
 
 /*
@@ -25,6 +25,41 @@
   display: block;
 }
 
+.label.type.normal,
+.label.type.fire,
+.label.type.water,
+.label.type.electric,
+.label.type.grass,
+.label.type.ice,
+.label.type.fighting,
+.label.type.poison,
+.label.type.ground,
+.label.type.flying,
+.label.type.psychic,
+.label.type.bug,
+.label.type.rock,
+.label.type.ghost,
+.label.type.dragon,
+.label.type.dark,
+.label.type.steel,
+.label.type.fairy {
+  color: #fff;
+}
+
+.label.type.electric,
+.label.type.fighting,
+.label.type.ground {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.label.type.electric .inner,
+.label.type.fighting .inner,
+.label.type.ground .inner {
+  transform: scale(0.9, 1);
+  width: 45px;
+}
+
 .label.type.normal {
   background-color: #aa9;
 }
@@ -39,13 +74,6 @@
 
 .label.type.electric {
   background-color: #fc3;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.label.type.electric .inner {
-  transform: scale(0.9, 1);
-  width: 45px;
 }
 
 .label.type.grass {
@@ -58,13 +86,6 @@
 
 .label.type.fighting {
   background-color: #b54;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.label.type.fighting .inner {
-  transform: scale(0.85, 1);
-  width: 48px;
 }
 
 .label.type.poison {
@@ -73,13 +94,6 @@
 
 .label.type.ground {
   background-color: #db5;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.label.type.ground .inner {
-  transform: scale(0.9, 1);
-  width: 45px;
 }
 
 .label.type.flying {

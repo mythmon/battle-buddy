@@ -1,16 +1,23 @@
+import { History, Location } from "history";
 import _get from "lodash-es/get";
 import React from "react";
+import { match as matchType, withRouter } from "react-router-dom";
 import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
-import { titleCase } from "../utils";
 
 import pokeapi from "../pokeapi";
+import { titleCase } from "../utils";
 import PokemonDetails from "./PokemonDetails";
 import "./style.css";
+
+interface PokemonPageProps {
+  match: matchType<{ name: string }>;
+  location: Location;
+  history: History;
+}
 
 interface PokemonPageState {
   loading: boolean;
   pokedex: null | PokedexEntry[];
-  pokemon: null | string;
 }
 
 interface PokedexEntry {
@@ -20,11 +27,10 @@ interface PokedexEntry {
   };
 }
 
-export default class PokemonPage extends React.Component<{}, PokemonPageState> {
+class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
   public state = {
     loading: true,
     pokedex: null,
-    pokemon: null,
   };
 
   constructor(props) {
@@ -41,11 +47,14 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
   }
 
   public handlePokemon(_: any, { value }: { value: string }) {
-    this.setState({ pokemon: value });
+    const { history, match } = this.props;
+    const newUrl = match.path.replace(":name?", value);
+    history.push(newUrl);
   }
 
   public render() {
-    const { pokemon, pokedex } = this.state;
+    const { match } = this.props;
+    const { pokedex } = this.state;
 
     return (
       <Segment vertical={true}>
@@ -60,19 +69,21 @@ export default class PokemonPage extends React.Component<{}, PokemonPageState> {
               <PokemonDropdown
                 onChange={this.handlePokemon}
                 pokedex={pokedex}
-                value={pokemon}
+                value={match.params.name}
                 placeholder="Defending Pokemon"
               />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row stretched={true}>
-            <PokemonDetails pokemon={pokemon} />
+            <PokemonDetails pokemon={match.params.name} />
           </Grid.Row>
         </Grid>
       </Segment>
     );
   }
 }
+
+export default withRouter(PokemonPage);
 
 function PokemonDropdown({
   onChange,
@@ -92,10 +103,12 @@ function PokemonDropdown({
       text: titleCase(pokemon.pokemon_species.name),
       value: pokemon.pokemon_species.name,
     }));
-  } else if (value) {
-    options = [{ key: value, text: titleCase(value), value }];
   } else {
     options = [];
+  }
+
+  if (value && !options.some(o => o.value === value)) {
+    options.push({ key: value, text: titleCase(value), value });
   }
 
   return (

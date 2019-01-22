@@ -9,3 +9,8 @@
 .root {
   flex: 1 1 100%;
 }
+
+.subtle {
+  font-size: 0.8em;
+  opacity: 0.9;
+}
