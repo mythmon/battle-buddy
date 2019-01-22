@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "103951c6f6967487c712",
-    "url": "/battle-buddy/static/css/main.c5bab6d2.chunk.css"
+    "revision": "fe212072772212538780",
+    "url": "/battle-buddy/static/css/main.23e5c97f.chunk.css"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
     "url": "/battle-buddy/static/media/brand-icons.a1a749e8.svg"
   },
   {
-    "revision": "719d60502b765f8033a8",
-    "url": "/battle-buddy/static/js/1.719d6050.chunk.js"
+    "revision": "e73cfbf4bdcf16e236cd",
+    "url": "/battle-buddy/static/js/1.e73cfbf4.chunk.js"
   },
   {
     "revision": "0e32d45840d88bcfc164",
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "103951c6f6967487c712",
-    "url": "/battle-buddy/static/js/main.103951c6.chunk.js"
+    "revision": "fe212072772212538780",
+    "url": "/battle-buddy/static/js/main.fe212072.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -80,11 +80,11 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.962a1bf3.svg"
   },
   {
-    "revision": "719d60502b765f8033a8",
-    "url": "/battle-buddy/static/css/1.0f6ed8ec.chunk.css"
+    "revision": "e73cfbf4bdcf16e236cd",
+    "url": "/battle-buddy/static/css/1.7dbba666.chunk.css"
   },
   {
-    "revision": "32965a6f9041dfaafc76690a683fb87c",
+    "revision": "98460e00e63f0dc989a418c3506dfedc",
     "url": "/battle-buddy/index.html"
   }
 ];
