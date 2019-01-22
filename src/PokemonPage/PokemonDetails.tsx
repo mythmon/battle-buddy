@@ -45,6 +45,10 @@ export default class PokemonDetails extends React.Component<
 
   public async fetchPokemonDetails({ pokemon } = this.props) {
     if (!pokemon) {
+      this.setState({
+        chosenVariety: null,
+        speciesDetails: null,
+      });
       return;
     }
     try {
