@@ -1,24 +1,29 @@
 workflow "Deploy" {
   on = "push"
-  resolves = [
-    "build",
-    "lint",
+  resolves = [    
+    "deploy",
   ]
 }
 
 action "install" {
-  uses = "actions/npm@de7a3705a9510ee12702e124482fad6af249991b"
+  uses = "borales/actions-yarn@master"
   args = "install"
 }
 
 action "build" {
-  uses = "actions/npm@de7a3705a9510ee12702e124482fad6af249991b"
+  uses = "borales/actions-yarn@master"
   args = "run build"
   needs = ["install"]
 }
 
 action "lint" {
-  uses = "actions/npm@de7a3705a9510ee12702e124482fad6af249991b"
+  uses = "borales/actions-yarn@master"
   args = "run lint"
   needs = ["install"]
+}
+
+action "deploy" {
+  uses = "mythmon/actions-gh-pages@master"
+  needs = ["lint", "build"]
+  secrets = ["PERSONAL_ACCESS_TOKEN"]
 }
