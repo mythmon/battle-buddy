@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "fe212072772212538780",
-    "url": "/battle-buddy/static/css/main.23e5c97f.chunk.css"
+    "revision": "27982e6e3d4cecd7dee7",
+    "url": "/battle-buddy/static/css/main.e038a7a7.chunk.css"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
     "url": "/battle-buddy/static/media/brand-icons.a1a749e8.svg"
   },
   {
-    "revision": "e73cfbf4bdcf16e236cd",
-    "url": "/battle-buddy/static/js/1.e73cfbf4.chunk.js"
+    "revision": "3e10e793a3bff4b0300c",
+    "url": "/battle-buddy/static/js/1.3e10e793.chunk.js"
   },
   {
     "revision": "0e32d45840d88bcfc164",
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "fe212072772212538780",
-    "url": "/battle-buddy/static/js/main.fe212072.chunk.js"
+    "revision": "27982e6e3d4cecd7dee7",
+    "url": "/battle-buddy/static/js/main.27982e6e.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -64,12 +64,12 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
   },
   {
-    "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
-    "url": "/battle-buddy/static/media/brand-icons.c5ebe0b3.ttf"
-  },
-  {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
     "url": "/battle-buddy/static/media/brand-icons.13db00b7.eot"
+  },
+  {
+    "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
+    "url": "/battle-buddy/static/media/brand-icons.c5ebe0b3.ttf"
   },
   {
     "revision": "82f60bd0b94a1ed68b1e6e309ce2e8c3",
@@ -80,11 +80,11 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.962a1bf3.svg"
   },
   {
-    "revision": "e73cfbf4bdcf16e236cd",
-    "url": "/battle-buddy/static/css/1.7dbba666.chunk.css"
+    "revision": "3e10e793a3bff4b0300c",
+    "url": "/battle-buddy/static/css/1.9659b875.chunk.css"
   },
   {
-    "revision": "98460e00e63f0dc989a418c3506dfedc",
+    "revision": "94c396bb586468c3fee3bade0daeb141",
     "url": "/battle-buddy/index.html"
   }
 ];
