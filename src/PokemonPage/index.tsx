@@ -1,9 +1,17 @@
 import { History, Location } from "history";
 import _get from "lodash-es/get";
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { match as matchType, withRouter } from "react-router-dom";
-import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
+import {
+  Dropdown,
+  DropdownItemProps,
+  DropdownProps,
+  Grid,
+  Header,
+  Segment,
+} from "semantic-ui-react";
 
+import { Pokedex } from "pokeapi-js-wrapper";
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
 import PokemonDetails from "./PokemonDetails";
@@ -17,14 +25,7 @@ interface PokemonPageProps {
 
 interface PokemonPageState {
   loading: boolean;
-  pokedex: null | PokedexEntry[];
-}
-
-interface PokedexEntry {
-  entry_number: number;
-  pokemon_species: {
-    name: string;
-  };
+  pokedex: null | Array<Pokedex>;
 }
 
 class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
@@ -33,7 +34,7 @@ class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
     pokedex: null,
   };
 
-  constructor(props) {
+  constructor(props: PokemonPageProps) {
     super(props);
     this.handlePokemon = this.handlePokemon.bind(this);
   }
@@ -46,9 +47,9 @@ class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
     }
   }
 
-  public handlePokemon(_: any, { value }: { value: string }) {
+  public handlePokemon(_: SyntheticEvent, { value }: DropdownProps) {
     const { history, match } = this.props;
-    const newUrl = match.path.replace(":name?", value);
+    const newUrl = match.path.replace(":name?", value as string);
     history.push(newUrl);
   }
 
@@ -85,18 +86,23 @@ class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
 
 export default withRouter(PokemonPage);
 
+interface PokemonDropdownProps {
+  onChange?: (
+    ev: SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps,
+  ) => void;
+  pokedex: null | Array<Pokedex>;
+  value: string;
+  placeholder?: string;
+}
+
 function PokemonDropdown({
   onChange,
   pokedex,
   value,
   placeholder,
-}: {
-  onChange?: (ev, el) => void;
-  pokedex: PokedexEntry[];
-  value: string;
-  placeholder?: string;
-}) {
-  let options;
+}: PokemonDropdownProps) {
+  let options: Array<DropdownItemProps>;
   if (pokedex) {
     options = pokedex.map(pokemon => ({
       key: pokemon.pokemon_species.name,
@@ -123,28 +129,4 @@ function PokemonDropdown({
       value={value}
     />
   );
-}
-
-export interface PokemonSpecies {
-  name: string;
-  names: PokemonName[];
-  pokedex_numbers: PokedexNumber[];
-}
-
-interface PokemonName {
-  name: string;
-  language: {
-    name: string;
-  };
-}
-
-interface PokedexNumber {
-  entry_number: number;
-  pokedex: {
-    name: string;
-  };
-}
-
-export interface PokemonVariety {
-  name: string;
 }

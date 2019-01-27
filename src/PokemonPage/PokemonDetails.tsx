@@ -1,20 +1,27 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import {
   Card,
   Dimmer,
+  Form,
   Grid,
   Header,
   Icon,
   Image,
+  Placeholder,
   Segment,
 } from "semantic-ui-react";
 
-import { PokemonSpecies, PokemonVariety } from ".";
+import {
+  PokemonSpecies,
+  PokemonTypeSlot,
+  PokemonVariety,
+  PokemonVarietyPointer,
+} from "pokeapi-js-wrapper";
 import ErrorDisplay from "../components/ErrorDisplay";
 import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
 import TypeSummary from "../TypesPage/TypeSummary";
-import { keyedValue } from "../utils";
+import { keyedValue, titleCase } from "../utils";
 
 interface PokemonDetailsProps {
   pokemon: string;
@@ -24,7 +31,6 @@ interface PokemonDetailsState {
   loading: boolean;
   speciesDetails: null | PokemonSpecies;
   varieties: { [name: string]: PokemonVariety };
-  chosenVariety: null | string;
   error: null | {
     source: any;
     description: string;
@@ -36,7 +42,6 @@ export default class PokemonDetails extends React.Component<
   PokemonDetailsState
 > {
   public state = {
-    chosenVariety: null,
     error: null,
     loading: false,
     speciesDetails: null,
@@ -46,7 +51,6 @@ export default class PokemonDetails extends React.Component<
   public async fetchPokemonDetails({ pokemon } = this.props) {
     if (!pokemon) {
       this.setState({
-        chosenVariety: null,
         speciesDetails: null,
       });
       return;
@@ -54,33 +58,24 @@ export default class PokemonDetails extends React.Component<
     try {
       this.setState({ loading: true });
       const speciesDetails = await pokeapi.getPokemonSpeciesByName(pokemon);
-      this.setState({ speciesDetails });
-
-      let chosenVariety = null;
+      this.setState({ speciesDetails, varieties: {} });
 
       const varietyPromises = speciesDetails.varieties.map(
-        async ({ is_default, pokemon: variety }) => {
-          if (is_default) {
-            chosenVariety = variety.name;
-          }
-          return pokeapi.getPokemonByName(variety.name);
+        async ({ pokemon: { name: varietyName } }: PokemonVarietyPointer) => {
+          return pokeapi.getPokemonByName(varietyName);
         },
       );
-      const varieties = {};
+      const varieties: { [name: string]: PokemonVariety } = {};
       for (const varietyPromise of varietyPromises) {
         const variety = await varietyPromise;
         varieties[variety.name] = variety;
       }
-      if (!chosenVariety) {
-        chosenVariety = await varietyPromises[0].name;
-      }
 
-      this.setState({ loading: false, varieties, chosenVariety, error: null });
+      this.setState({ loading: false, varieties, error: null });
     } catch (err) {
       // tslint:disable-next-line: no-console
       console.error(err);
       this.setState({
-        chosenVariety: null,
         error: {
           description: "Could not load pokemon information.",
           source: err,
@@ -96,15 +91,13 @@ export default class PokemonDetails extends React.Component<
     this.fetchPokemonDetails();
   }
 
-  public componentWillReceiveProps(newProps) {
+  public componentWillReceiveProps(newProps: PokemonDetailsProps) {
     this.fetchPokemonDetails(newProps);
   }
 
   public render() {
     const { pokemon } = this.props;
-    const { error, speciesDetails, varieties, chosenVariety } = this.state;
-
-    const variety = varieties && varieties[chosenVariety];
+    const { error, speciesDetails, varieties } = this.state;
 
     return (
       <>
@@ -123,70 +116,137 @@ export default class PokemonDetails extends React.Component<
             <ErrorDisplay error={error} />
           </Grid.Column>
         )}
-        <Grid.Column width={8}>
-          {speciesDetails && variety && (
-            <PokemonInfo species={speciesDetails} variety={variety} />
-          )}
-        </Grid.Column>
-        <Grid.Column width={8}>
-          {variety && (
-            <TypeSummary types={variety.types.map(t => t.type.name)} />
-          )}
-        </Grid.Column>
+        {speciesDetails && varieties && Object.values(varieties).length ? (
+          <PokemonInfo species={speciesDetails} varieties={varieties} />
+        ) : (
+          <PokemonInfo.Placeholder />
+        )}
       </>
     );
   }
 }
 
-function PokemonInfo({ species, variety }) {
+interface PokemonInfoProps {
+  species: PokemonSpecies;
+  varieties: { [name: string]: PokemonVariety };
+}
+
+function PokemonInfo({ species, varieties }: PokemonInfoProps) {
+  const defaultVariety =
+    Object.values(varieties).find(v => v.is_default) || varieties[0];
+  const [varietyName, setVarietyName] = React.useState(defaultVariety.name);
+  useEffect(() => {
+    if (!(varietyName in varieties)) {
+      setVarietyName(defaultVariety.name);
+    }
+  }, [varieties]);
+
+  const variety = varieties[varietyName as string];
+
+  const { entry_number } = keyedValue(species.pokedex_numbers, {
+    "pokedex.name": "kanto",
+  });
+  const { name: speciesName } = keyedValue(species.names, {
+    "language.name": "en",
+  });
+  const { genus } = keyedValue(species.genera, { "language.name": "en" });
+
   return (
-    <Card fluid>
-      <Card.Content>
-        {variety && (
-          <Image
-            className="pokemon-sprite"
-            floated="left"
-            src={variety.sprites.front_default}
-          />
-        )}
-        {species && (
-          <>
-            <Card.Header>
-              #
-              {
-                keyedValue(species.pokedex_numbers, {
-                  "pokedex.name": "kanto",
-                }).entry_number
-              }{" "}
-              -{" "}
-              {
-                keyedValue(species.names, {
+    <>
+      <Grid.Column width={8}>
+        <Card fluid>
+          <Card.Content>
+            {variety && variety.sprites.front_default ? (
+              <Image
+                className="pokemon-sprite"
+                floated="left"
+                src={variety.sprites.front_default}
+              />
+            ) : (
+              <div className="pokemon-sprite placeholder" />
+            )}
+            {species && (
+              <>
+                <Card.Header>
+                  #{entry_number} - {speciesName}
+                </Card.Header>
+                <Card.Meta>{genus}</Card.Meta>
+              </>
+            )}
+            {variety &&
+              variety.types.map(({ slot, type: { name } }: PokemonTypeSlot) => (
+                <TypeBadge key={slot} type={name} />
+              ))}
+            {species && (
+              <Card.Description>
+                {keyedValue(species.flavor_text_entries, {
                   "language.name": "en",
-                }).name
-              }
-            </Card.Header>
-            <Card.Meta>
-              {
-                keyedValue(species.genera, {
-                  "language.name": "en",
-                }).genus
-              }
-            </Card.Meta>
-          </>
-        )}
-        {variety &&
-          variety.types.map(({ slot, type: { name } }) => (
-            <TypeBadge key={slot} type={name} />
-          ))}
-        {species && (
-          <Card.Description>
-            {keyedValue(species.flavor_text_entries, {
-              "language.name": "en",
-              "version.name": "yellow",
-            }).flavor_text.replace("\u000C", " ")}
-          </Card.Description>
-        )}
-      </Card.Content>
-    </Card>
+                  "version.name": "yellow",
+                }).flavor_text.replace("\u000C", " ")}
+              </Card.Description>
+            )}
+            {varieties && Object.values(varieties).length > 1 && (
+              <Form>
+                <Form.Group inline>
+                  {Object.values(varieties).map(v => {
+                    const displayName =
+                      titleCase(
+                        v.name
+                          .replace(species.name, "")
+                          .replace(/-/g, " ")
+                          .trim(),
+                      ) || "Kanto";
+                    return (
+                      <Form.Radio
+                        key={v.name}
+                        label={displayName}
+                        value={v.name}
+                        checked={varietyName === v.name}
+                        onChange={() => setVarietyName(v.name)}
+                      />
+                    );
+                  })}
+                </Form.Group>
+              </Form>
+            )}
+          </Card.Content>
+        </Card>
+      </Grid.Column>
+      <Grid.Column width={8}>
+        {variety && <TypeSummary types={variety.types.map(t => t.type.name)} />}
+      </Grid.Column>
+    </>
   );
 }
+
+PokemonInfo.Placeholder = () => {
+  return (
+    <>
+      <Grid.Column width={8}>
+        <Card fluid>
+          <Placeholder>
+            <Card.Content>
+              <Placeholder.Image className="pokemon-sprite" floated="left" />
+              <Card.Header>
+                <Placeholder.Header />
+              </Card.Header>
+              <Card.Meta>
+                <Placeholder.Line />
+              </Card.Meta>
+              <TypeBadge.Placeholder />
+              <Card.Description>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Paragraph>
+              </Card.Description>
+            </Card.Content>
+          </Placeholder>
+        </Card>
+      </Grid.Column>
+      <Grid.Column width={8}>
+        <TypeSummary.Placeholder />
+      </Grid.Column>
+    </>
+  );
+};

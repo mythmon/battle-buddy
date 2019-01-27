@@ -2,3 +2,19 @@
   height: 96px;
   width: 96px;
 }
+
+.pokemon-sprite.placeholder {
+  border-radius: 100%;
+  background-color: #aaa;
+  position: relative;
+  text-align: center;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.pokemon-sprite.placeholder::before {
+  content: "?";
+  font-size: 4em;
+  line-height: 96px;
+}

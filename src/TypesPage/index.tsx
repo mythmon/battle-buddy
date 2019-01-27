@@ -1,7 +1,16 @@
 import { History, Location } from "history";
-import React from "react";
+import { NamedResource } from "pokeapi-js-wrapper";
+import React, { SyntheticEvent } from "react";
 import { match as matchType, withRouter } from "react-router-dom";
-import { Dropdown, Grid, Header, Icon, Segment } from "semantic-ui-react";
+import {
+  Dropdown,
+  DropdownProps,
+  Grid,
+  Header,
+  Icon,
+  Segment,
+  StrictDropdownItemProps,
+} from "semantic-ui-react";
 
 import ErrorDisplay, { ErrorDetail } from "../components/ErrorDisplay";
 import TypeBadge from "../components/TypeBadge";
@@ -17,7 +26,7 @@ interface TypesPageProps {
 
 interface TypesPageState {
   error: null | ErrorDetail;
-  typeList: null | PokedexType[];
+  typeList: Array<PokedexType>;
 }
 
 interface PokedexType {
@@ -27,7 +36,7 @@ interface PokedexType {
 class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
   public state = {
     error: null,
-    typeList: null,
+    typeList: [],
   };
 
   public async componentDidMount() {
@@ -38,18 +47,18 @@ class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
     this.checkTypes();
   }
 
-  public componentWillReceiveProps(newProps) {
+  public componentWillReceiveProps(newProps: TypesPageProps) {
     this.checkTypes(newProps);
   }
 
-  public handleTypes(index) {
+  public handleTypes(index: number) {
     if (index < 0 || index > 1) {
       throw new Error(`Invalid index ${index}`);
     }
-    return (_event, { value }: { value: string }) => {
+    return (event: SyntheticEvent, { value }: DropdownProps) => {
       const { match, history } = this.props;
       let types = (match.params.types || "").split(",");
-      types[index] = value;
+      types[index] = value as string;
       types = types.filter(t => !!t);
       const newUrl = match.path.replace(":types?", types.join(","));
       history.push(newUrl);
@@ -124,7 +133,11 @@ class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
     }
     const types = this.getTypes(props);
     for (const type of types) {
-      if (!typeList.some(typeDefinition => typeDefinition.name === type)) {
+      if (
+        !typeList.some(
+          (typeDefinition: NamedResource) => typeDefinition.name === type,
+        )
+      ) {
         // tslint:disable-next-line: no-console
         console.error("Invalid type:", type, "not included in", typeList);
         this.setState({
@@ -145,8 +158,20 @@ class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
 
 export default withRouter(TypesPage);
 
-function TypeDropdown({ value, typeList, onChange, placeholder }) {
-  let options;
+interface TypeDropdownProps {
+  value: string;
+  typeList: null | Array<NamedResource>;
+  onChange?: (ev: SyntheticEvent, props: DropdownProps) => void;
+  placeholder?: string;
+}
+
+function TypeDropdown({
+  value,
+  typeList,
+  onChange,
+  placeholder,
+}: TypeDropdownProps) {
+  let options: Array<StrictDropdownItemProps>;
   if (typeList) {
     options = typeList.map(type => ({
       key: type.name,
@@ -157,11 +182,13 @@ function TypeDropdown({ value, typeList, onChange, placeholder }) {
     options = [];
   }
   if (value && !options.some(o => o.value === value)) {
-    options.push({ key: value, text: titleCase(value), value });
+    options.push({ text: titleCase(value), value });
   }
-  options.sort((a: { text: string }, b: { text: string }) =>
-    a.text.localeCompare(b.text),
-  );
+  options.sort((a: StrictDropdownItemProps, b: StrictDropdownItemProps) => {
+    return (a.text || "")
+      .toString()
+      .localeCompare((b.text || "").toString() || "");
+  });
 
   return (
     <Dropdown

@@ -1,18 +1,21 @@
 import React from "react";
-import { Label } from "semantic-ui-react";
+import { Label, Placeholder } from "semantic-ui-react";
 
 import { titleCase } from "../../utils";
 import "./style.css";
 
-export default class TypeBadge extends React.Component<{
+interface TypeBadgeProps {
   type: string;
-}> {
-  public render() {
-    const { type } = this.props;
-    return (
-      <Label as="span" className={`type ${type}`}>
-        <span className="inner">{titleCase(type)}</span>
-      </Label>
-    );
-  }
 }
+
+export default function TypeBadge({ type }: TypeBadgeProps) {
+  return (
+    <Label as="span" className={`type ${type}`}>
+      <span className="inner">{titleCase(type)}</span>
+    </Label>
+  );
+}
+
+TypeBadge.Placeholder = () => {
+  return <Placeholder className="type placeholder" as="span" />;
+};

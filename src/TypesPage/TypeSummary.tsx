@@ -1,42 +1,84 @@
 import cx from "classnames";
 import { Map } from "immutable";
 import React from "react";
-import { Card, Dimmer, Grid, Label, List } from "semantic-ui-react";
+import {
+  Card,
+  Dimmer,
+  Grid,
+  Label,
+  List,
+  Placeholder,
+} from "semantic-ui-react";
 
+import { PokemonType } from "pokeapi-js-wrapper";
 import TypeBadge from "../components/TypeBadge";
 import pokeapi from "../pokeapi";
 import { titleCase } from "../utils";
 import "./style.css";
 
 interface TypeSummaryProps {
-  types: string[];
+  types: Array<string>;
+}
+
+interface TypeCollection {
+  [name: string]: PokemonType;
 }
 
 interface TypeSummaryState {
-  typeData: { [type: string]: TypeData };
+  typeData: TypeCollection;
   loading: boolean;
-}
-
-interface TypeData {
-  name: string;
 }
 
 export default class TypeSummary extends React.Component<
   TypeSummaryProps,
   TypeSummaryState
 > {
+  // tslint:disable-next-line:variable-name
+  public static Placeholder = () => {
+    return (
+      <Card fluid>
+        <Placeholder>
+          <Card.Content>
+            <Card.Header>
+              <Placeholder.Header />
+            </Card.Header>
+          </Card.Content>
+          <Card.Content>
+            <List>
+              <Grid>
+                <Grid.Row>
+                  {[0, 1].map(column => (
+                    <Grid.Column key={column} width={8}>
+                      {[0, 1, 2].map(idx => (
+                        <List.Item key={idx} className="type-multiplier">
+                          <TypeBadge.Placeholder />
+                          <MultiplierBadge.Placeholder />
+                        </List.Item>
+                      ))}
+                    </Grid.Column>
+                  ))}
+                </Grid.Row>
+              </Grid>
+            </List>
+          </Card.Content>
+        </Placeholder>
+      </Card>
+    );
+  };
+
   public state = {
     loading: false,
     typeData: {},
   };
 
-  public async fetchTypeData(types = this.props.types) {
+  public async fetchTypeData({ types }: TypeSummaryProps = this.props) {
+    const { typeData }: { typeData: TypeCollection } = this.state;
     for (const type of types) {
-      if (this.state.typeData[type]) {
+      if (typeData[type]) {
         continue;
       }
       this.setState({ loading: true });
-      const newTypeData = { ...this.state.typeData };
+      const newTypeData: TypeCollection = { ...this.state.typeData };
       newTypeData[type] = await pokeapi.getTypeByName(type);
       this.setState({ typeData: newTypeData });
     }
@@ -47,17 +89,18 @@ export default class TypeSummary extends React.Component<
     this.fetchTypeData();
   }
 
-  public componentWillReceiveProps(newProps) {
-    this.fetchTypeData(newProps.types);
+  public componentWillReceiveProps(newProps: TypeSummaryProps) {
+    this.fetchTypeData(newProps);
   }
 
   public calcDamageMultipliers(): Map<string, number> {
+    const { typeData }: { typeData: TypeCollection } = this.state;
     let multipliers: Map<string, number> = Map();
     for (const defenseType of this.props.types) {
-      if (!this.state.typeData[defenseType]) {
+      if (!typeData[defenseType]) {
         continue;
       }
-      const { damage_relations } = this.state.typeData[defenseType];
+      const { damage_relations } = typeData[defenseType];
       for (const { name: attackType } of damage_relations.double_damage_from) {
         multipliers = multipliers.update(attackType, 1, (v: number) => v * 2);
       }
@@ -74,6 +117,10 @@ export default class TypeSummary extends React.Component<
   public render() {
     const { types } = this.props;
     const { loading } = this.state;
+
+    if (loading) {
+      return <TypeSummary.Placeholder />;
+    }
 
     const multipliers = this.calcDamageMultipliers()
       .entrySeq()
@@ -136,15 +183,24 @@ export default class TypeSummary extends React.Component<
   }
 }
 
-function MultiplierBadge({ by }) {
-  const { text = by.toString(), color, fraction = false } = {
-    "0": { text: "0x", color: "black" },
-    "0.25": { text: "¼", color: "purple", fraction: true },
-    "0.5": { text: "½", color: "red", fraction: true },
-    "1": { text: "1x" },
-    "2": { text: "2x", color: "green" },
-    "4": { text: "4x", color: "blue" },
-  }[by.toString()];
+type semanticUiColor = "black" | "purple" | "red" | "green" | "blue";
+const multiplierDisplayData: {
+  [mult: string]: { text: string; color?: semanticUiColor; fraction?: boolean };
+} = {
+  "0": { text: "0x", color: "black" },
+  "0.25": { text: "¼", color: "purple", fraction: true },
+  "0.5": { text: "½", color: "red", fraction: true },
+  "1": { text: "1x" },
+  "2": { text: "2x", color: "green" },
+  "4": { text: "4x", color: "blue" },
+};
+
+function MultiplierBadge({ by }: { by: number }) {
+  const {
+    text = by.toString(),
+    color,
+    fraction = false,
+  } = multiplierDisplayData[by.toString()];
 
   return (
     <Label
@@ -157,3 +213,7 @@ function MultiplierBadge({ by }) {
     </Label>
   );
 }
+
+MultiplierBadge.Placeholder = () => {
+  return <Placeholder.Image className="multiplier-badge placeholder" />;
+};
