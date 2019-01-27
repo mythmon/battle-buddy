@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/js/0.6a6fba1d.chunk.js"
   },
   {
-    "revision": "a9ed393626fc703f4775",
-    "url": "/battle-buddy/static/js/main.a9ed3936.chunk.js"
+    "revision": "d4ec2feb0429070ab271",
+    "url": "/battle-buddy/static/js/main.d4ec2feb.chunk.js"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
   },
   {
-    "revision": "a9ed393626fc703f4775",
+    "revision": "d4ec2feb0429070ab271",
     "url": "/battle-buddy/static/css/main.7ea90a6f.chunk.css"
   },
   {
@@ -116,7 +116,7 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/css/2.a2020ad7.chunk.css"
   },
   {
-    "revision": "234459159542dcb4d6fdcabe29e474cb",
+    "revision": "2baac078f6cbc10ac6f82202e09c8b37",
     "url": "/battle-buddy/index.html"
   }
 ];
