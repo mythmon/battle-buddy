@@ -61,7 +61,7 @@ class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
     const types = this.getTypes();
 
     return (
-      <Segment vertical={true}>
+      <Segment vertical>
         <Grid>
           <Grid.Row>
             <Grid.Column>
@@ -96,8 +96,8 @@ class TypesPage extends React.Component<TypesPageProps, TypesPageState> {
                   <TypeSummary types={types} />
                 </>
               ) : (
-                <Segment placeholder={true}>
-                  <Header icon={true}>
+                <Segment placeholder>
+                  <Header icon>
                     <Icon name="search" />
                     Search for a type to begin
                   </Header>
@@ -165,12 +165,12 @@ function TypeDropdown({ value, typeList, onChange, placeholder }) {
 
   return (
     <Dropdown
-      compact={true}
-      fluid={true}
+      compact
+      fluid
       placeholder={placeholder}
-      search={true}
-      selection={true}
-      clearable={true}
+      search
+      selection
+      clearable
       options={options}
       onChange={onChange}
       value={value}

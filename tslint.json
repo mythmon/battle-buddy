@@ -10,6 +10,7 @@
       "check-format",
       "allow-leading-underscore",
       "ban-keywords"
-    ]
+    ],
+    "jsx-boolean-value": [true, "never"]
   }
 }

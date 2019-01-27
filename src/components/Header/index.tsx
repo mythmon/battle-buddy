@@ -9,8 +9,8 @@ export default function Header() {
   return (
     <Menu
       className="top-nav"
-      inverted={true}
-      borderless={true}
+      inverted
+      borderless
       color="red"
       style={{ borderRadius: 0 }}
     >
@@ -26,7 +26,7 @@ export default function Header() {
           Types
         </Menu.Item>
         <Menu.Item
-          icon={true}
+          icon
           position="right"
           as="a"
           href="https://github.com/mythmon/battle-buddy"

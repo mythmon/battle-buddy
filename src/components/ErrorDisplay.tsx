@@ -11,8 +11,8 @@ export default function ErrorDisplay({ error }: { error: ErrorDetail }) {
     return null;
   }
   return (
-    <Segment textAlign="center" inverted={true} color="red">
-      <Header icon={true}>
+    <Segment textAlign="center" inverted color="red">
+      <Header icon>
         <Icon name="exclamation" />
         Something has gone terribly wrong.
       </Header>

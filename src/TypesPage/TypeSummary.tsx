@@ -90,7 +90,7 @@ export default class TypeSummary extends React.Component<
       .toJS();
 
     return (
-      <Card fluid={true}>
+      <Card fluid>
         <Card.Content>
           <Card.Header>
             {types.length > 0 && (
@@ -149,7 +149,7 @@ function MultiplierBadge({ by }) {
   return (
     <Label
       className={cx("multiplier-badge", { fraction })}
-      circular={true}
+      circular
       size="large"
       color={color}
     >

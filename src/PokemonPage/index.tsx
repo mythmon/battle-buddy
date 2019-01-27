@@ -57,8 +57,8 @@ class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
     const { pokedex } = this.state;
 
     return (
-      <Segment vertical={true}>
-        <Grid stackable={true}>
+      <Segment vertical>
+        <Grid stackable>
           <Grid.Row>
             <Grid.Column>
               <Header as="h2">Defender Info</Header>
@@ -74,7 +74,7 @@ class PokemonPage extends React.Component<PokemonPageProps, PokemonPageState> {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row stretched={true}>
+          <Grid.Row stretched>
             <PokemonDetails pokemon={match.params.name} />
           </Grid.Row>
         </Grid>
@@ -113,11 +113,11 @@ function PokemonDropdown({
 
   return (
     <Dropdown
-      compact={true}
-      fluid={true}
+      compact
+      fluid
       placeholder={placeholder}
-      search={true}
-      selection={true}
+      search
+      selection
       options={options}
       onChange={onChange}
       value={value}

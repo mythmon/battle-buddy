@@ -4,10 +4,10 @@ import { Container, Grid, Segment } from "semantic-ui-react";
 
 import "./style.css";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <div className="home-page">
-      <Segment vertical={true} className="site-info">
+      <Segment vertical className="site-info">
         <p>
           Battle Buddy is a tool to help you win battles in Pokemon Let's Go.
         </p>

@@ -110,8 +110,8 @@ export default class PokemonDetails extends React.Component<
       <>
         {!pokemon && (
           <Grid.Column width={16}>
-            <Segment placeholder={true}>
-              <Header icon={true}>
+            <Segment placeholder>
+              <Header icon>
                 <Icon name="search" />
                 Search for a defending pokemon to begin
               </Header>
@@ -140,7 +140,7 @@ export default class PokemonDetails extends React.Component<
 
 function PokemonInfo({ species, variety }) {
   return (
-    <Card fluid={true}>
+    <Card fluid>
       <Card.Content>
         {variety && (
           <Image
