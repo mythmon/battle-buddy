@@ -4,20 +4,20 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/flags.9c74e172.png"
   },
   {
-    "revision": "22fd00eadcbd9d688df6",
-    "url": "/battle-buddy/static/js/0.22fd00ea.chunk.js"
+    "revision": "6a6fba1dcd141cc6f6df",
+    "url": "/battle-buddy/static/js/0.6a6fba1d.chunk.js"
   },
   {
-    "revision": "383c9e92ca94b0e9f809",
-    "url": "/battle-buddy/static/js/main.383c9e92.chunk.js"
+    "revision": "d4ec2feb0429070ab271",
+    "url": "/battle-buddy/static/js/main.d4ec2feb.chunk.js"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
     "url": "/battle-buddy/static/media/brand-icons.a1a749e8.svg"
   },
   {
-    "revision": "d9de0636506dc82b98a2",
-    "url": "/battle-buddy/static/js/2.d9de0636.chunk.js"
+    "revision": "64cb4fbf4127a2dad8bb",
+    "url": "/battle-buddy/static/js/2.64cb4fbf.chunk.js"
   },
   {
     "revision": "ade8eb4aa80bea615942",
@@ -28,28 +28,28 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.962a1bf3.svg"
   },
   {
-    "revision": "a44ab4ec872e5436d2fd",
-    "url": "/battle-buddy/static/js/4.a44ab4ec.chunk.js"
+    "revision": "df1074b1718950b02de7",
+    "url": "/battle-buddy/static/js/4.df1074b1.chunk.js"
   },
   {
     "revision": "82f60bd0b94a1ed68b1e6e309ce2e8c3",
     "url": "/battle-buddy/static/media/outline-icons.82f60bd0.svg"
   },
   {
-    "revision": "213d961094a65cde9f53",
-    "url": "/battle-buddy/static/js/5.213d9610.chunk.js"
+    "revision": "2556162141836979040d",
+    "url": "/battle-buddy/static/js/5.25561621.chunk.js"
   },
   {
     "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
     "url": "/battle-buddy/static/media/brand-icons.c5ebe0b3.ttf"
   },
   {
-    "revision": "22cfd1a002deec377e10",
-    "url": "/battle-buddy/static/js/6.22cfd1a0.chunk.js"
+    "revision": "1fed1bc463c3b17e9c4f",
+    "url": "/battle-buddy/static/js/6.1fed1bc4.chunk.js"
   },
   {
-    "revision": "793353bc1ede6f062851",
-    "url": "/battle-buddy/static/js/runtime~main.793353bc.js"
+    "revision": "f1ea3b6a221bcea7c749",
+    "url": "/battle-buddy/static/js/runtime~main.f1ea3b6a.js"
   },
   {
     "revision": "cd6c777f1945164224dee082abaea03a",
@@ -64,12 +64,12 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/brand-icons.13db00b7.eot"
   },
   {
-    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
-    "url": "/battle-buddy/static/media/outline-icons.ad97afd3.ttf"
-  },
-  {
     "revision": "701ae6abd4719e9c2ada3535a497b341",
     "url": "/battle-buddy/static/media/outline-icons.701ae6ab.eot"
+  },
+  {
+    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
+    "url": "/battle-buddy/static/media/outline-icons.ad97afd3.ttf"
   },
   {
     "revision": "0ab54153eeeca0ce03978cc463b257f7",
@@ -96,27 +96,27 @@ self.__precacheManifest = [
     "url": "/battle-buddy/static/media/icons.b87b9ba5.ttf"
   },
   {
-    "revision": "383c9e92ca94b0e9f809",
-    "url": "/battle-buddy/static/css/main.c588b221.chunk.css"
+    "revision": "d4ec2feb0429070ab271",
+    "url": "/battle-buddy/static/css/main.7ea90a6f.chunk.css"
   },
   {
-    "revision": "22cfd1a002deec377e10",
-    "url": "/battle-buddy/static/css/6.45d755ab.chunk.css"
+    "revision": "1fed1bc463c3b17e9c4f",
+    "url": "/battle-buddy/static/css/6.5fb74244.chunk.css"
   },
   {
-    "revision": "213d961094a65cde9f53",
-    "url": "/battle-buddy/static/css/5.31108a07.chunk.css"
+    "revision": "2556162141836979040d",
+    "url": "/battle-buddy/static/css/5.1f141457.chunk.css"
   },
   {
-    "revision": "a44ab4ec872e5436d2fd",
-    "url": "/battle-buddy/static/css/4.6fbc1efb.chunk.css"
+    "revision": "df1074b1718950b02de7",
+    "url": "/battle-buddy/static/css/4.1b8b3e93.chunk.css"
   },
   {
-    "revision": "d9de0636506dc82b98a2",
-    "url": "/battle-buddy/static/css/2.95416c6a.chunk.css"
+    "revision": "64cb4fbf4127a2dad8bb",
+    "url": "/battle-buddy/static/css/2.a2020ad7.chunk.css"
   },
   {
-    "revision": "738ada425ac16282996707e9931269dc",
+    "revision": "2baac078f6cbc10ac6f82202e09c8b37",
     "url": "/battle-buddy/index.html"
   }
 ];

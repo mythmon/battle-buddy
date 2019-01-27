@@ -1,0 +1,1 @@
+{"version":3,"sources":["/github/workspace/src/MissingPage/style.css"],"names":[],"mappings":"AAAA,cACE,gBAAiB,AACjB,6BAAsB,AAAtB,qBAAsB,AACtB,6BAAsB,AAAtB,oBAAsB,CACvB","file":"2.a2020ad7.chunk.css","sourcesContent":[".missing-page {\n  margin-top: 25vh;\n  transform: scale(1.5);\n  transform-origin: top;\n}\n"]}
